@@ -5,7 +5,7 @@ const commentsService = new CommentsService();
 
 class ArticlesService {
 
-async getLastTenByMostRecent(page = 1, limit = 5, category = null) {
+  async getLastTenByMostRecent(page = 1, limit = 5, category = null) {
     const skip = (page - 1) * limit;
 
     // Récupérer les catégories avec au moins un article
