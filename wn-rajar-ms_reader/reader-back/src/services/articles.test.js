@@ -23,5 +23,11 @@ describe('ArticlesService - getById', () =>{    // Conteneur groupant les tests 
     it("Appel de getById et retourne un article", async () =>{  // test individuel
         const result = await articlesService.getById(1)
         expect(result).toEqual({ id: 1, title: "Titre de l'article"})   // Comparaison entre le résultat obtenu et le résultat demandé
+
+        // On vérifie l'appel du mock pour être sûr que la fonction na pas été modifiée
+        const prisma = require('./../lib/prisma')   // récupération du module mocké
+        expect(prisma.article.findFirst).toHaveBeenCalledWith({
+            where: { id: 1, delete_date: null}
+        })
     })
 })
