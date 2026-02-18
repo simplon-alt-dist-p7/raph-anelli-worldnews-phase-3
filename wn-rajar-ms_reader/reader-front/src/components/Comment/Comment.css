@@ -1,0 +1,70 @@
+.comments {
+  background-color: #F3F5F8;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.comments__title {
+  color: #312F2F;
+  margin-bottom: 0.5rem;
+}
+
+.comments__loading {
+  color: #294C79;
+}
+
+.comments__empty {
+  color: #7B93B1;
+}
+
+.comments__item {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.comments__date {
+  margin: 0;
+  color: #7B93B1;
+  font-size: 0.85rem;
+}
+
+.comments__content {
+  margin: 0;
+  color: #294C79;
+}
+
+/* Formulaire */
+.comments__form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.comments__textarea {
+  resize: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #7B93B1;
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.comments__button {
+  align-self: flex-end;
+  padding: 0.4rem 0.8rem;
+  background-color: #294C79;
+  color: #F3F5F8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comments__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

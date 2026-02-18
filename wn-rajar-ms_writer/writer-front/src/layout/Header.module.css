@@ -1,0 +1,140 @@
+.header {
+  background: var(--color-white);
+  color: var(--color-text-dark);
+  box-shadow: var(--shadow-sm);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--color-bg-light);
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logoLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  transition: var(--transition);
+}
+
+.logo:hover {
+  opacity: 0.9;
+}
+
+.navLink {
+  color: var(--color-text-dark);
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+}
+
+.navLink:first-child {
+  justify-self: start;
+}
+
+.navLink:last-child {
+  justify-self: end;
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+  background-color: var(--color-bg-light);
+}
+
+.navLinkActive {
+  color: var(--color-primary);
+  background-color: rgba(41, 76, 121, 0.08);
+  border-color: rgba(41, 76, 121, 0.15);
+}
+
+/* Bouton Nouvel article */
+.navLinkCreate {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.navLinkCreate:hover {
+  background-color: var(--color-text-dark);
+  border-color: var(--color-text-dark);
+  color: var(--color-white);
+}
+
+.navLinkCreate.navLinkActive {
+  background-color: var(--color-text-dark);
+  border-color: var(--color-text-dark);
+  color: var(--color-white);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .headerContent {
+    padding: 0.6rem 1rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem 1rem;
+  }
+
+  .logoLink {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .logo {
+    max-width: 160px;
+  }
+
+  .navLink:first-child {
+    grid-row: 2;
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .navLink:last-child {
+    grid-row: 2;
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .navLink {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .headerContent {
+    gap: 0.5rem;
+  }
+
+  .navLink {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .logo {
+    max-width: 140px;
+  }
+}

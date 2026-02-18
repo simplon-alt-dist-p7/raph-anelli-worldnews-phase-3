@@ -1,0 +1,24 @@
+.header {
+  background-color: var(--color-white);
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__logo {
+  width: 300px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .header__logo {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1.5rem 1rem;
+  }
+}

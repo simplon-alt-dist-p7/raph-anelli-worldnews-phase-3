@@ -1,0 +1,20 @@
+services:
+  reader-back:
+    build: ./reader-back      # va lire le Dockerfile dans ce dossier pour faire le premier build
+    ports:
+      - "3001:3000"           # port backend local
+    volumes:
+      - ./reader-back:/app    # fait le reload du dossier sans avoir besoin de faire un nouveau build (hot-reload)
+    env_file:
+      - ./reader-back/.env
+    command: npm run dev      # commande pour lancer le backend
+  
+  reader-front:
+    build: ./reader-front
+    ports:
+      - "5174:5173"
+    volumes:
+      - ./reader-front:app
+    command: npm run dev
+    environment :
+      - VITE_API_URL=http://reader-back:3000    # url du backend pour l'utiliser au frontend

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-dark: #312F2F;
+  --color-blue-medium: #7B93B1;
+  --color-blue-dark: #294C79;
+  --color-light: #F3F5F8;
+  --color-white: #ffffff;
+  --color-background: #f5f5f5;
+
+  --font-title: 'EB Garamond', Georgia, serif;
+  --font-text: 'Newsreader', Georgia, serif;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: var(--font-text);
+  background-color: var(--color-background);
+  color: var(--color-dark);
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-title);
+}
+
+p {
+  font-family: var(--font-text);
+}

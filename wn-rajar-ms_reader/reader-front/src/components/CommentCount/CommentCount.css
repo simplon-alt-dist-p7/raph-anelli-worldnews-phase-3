@@ -1,0 +1,12 @@
+.comment-count {
+  font-family: var(--font-text);
+  font-size: 0.85rem;
+  color: var(--color-blue-medium);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.comment-count__icon {
+  vertical-align: middle;
+}

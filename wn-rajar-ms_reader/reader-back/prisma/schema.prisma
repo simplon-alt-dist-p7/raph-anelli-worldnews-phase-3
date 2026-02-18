@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider = "postgresql"
+  schemas  = ["reader"]
+}
+
+view Article {
+  id             Int       @unique
+  title          String    @db.VarChar(300)
+  subtitle       String    @db.VarChar(300)
+  subhead        String    @db.VarChar(1000)
+  body           String
+  publish_date   DateTime?
+  delete_date    DateTime?
+  category_id    Int
+  category_title String    @db.VarChar(50)
+
+  @@map("v_articles")
+  @@schema("reader")
+}
+
+view Category {
+  id    Int    @unique
+  title String @db.VarChar(50)
+
+  @@map("v_categories")
+  @@schema("reader")
+}
+
+model ArticleFavorite {
+  article_id Int      @id
+  added_date DateTime @default(now())
+
+  @@map("t_article_favorites")
+  @@schema("reader")
+}
+model Comment {
+  id          Int      @id @default(autoincrement())
+  articleId   Int      @map("article_id")
+  content     String   @db.VarChar(1000)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("t_article_comments")
+  @@schema("reader")
+}
+
+

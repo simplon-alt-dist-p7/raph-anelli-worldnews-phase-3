@@ -1,0 +1,151 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-top: 0.5rem;
+}
+
+/* Contrôles de page */
+.pageControls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pageControls li {
+  display: flex;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background-color: transparent;
+  color: var(--color-text-dark);
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.navButton:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+  transform: scale(1.05);
+}
+
+.navButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: var(--color-bg-light);
+  border-color: var(--color-bg-light);
+}
+
+.pageInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-dark);
+  min-width: 60px;
+  justify-content: center;
+}
+
+.pageNumber {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.pageSeparator {
+  color: var(--color-secondary);
+}
+
+.pageTotal {
+  color: var(--color-secondary);
+}
+
+/* Contrôles limite */
+.limitControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 10;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.limitControls label,
+.limitLabel {
+  font-size: 0.85rem;
+  color: var(--color-secondary);
+}
+
+.select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--color-secondary);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-family: "Newsreader", serif;
+  cursor: pointer;
+  background-color: var(--color-white);
+  transition: var(--transition);
+  min-width: 50px;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.select:hover {
+  border-color: var(--color-primary);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .pagination {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .pageControls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .limitControls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navButton {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 400px) {
+  .limitControls label {
+    display: none;
+  }
+
+  .limitLabel {
+    display: none;
+  }
+}

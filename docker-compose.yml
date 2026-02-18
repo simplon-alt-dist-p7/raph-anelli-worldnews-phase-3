@@ -1,0 +1,76 @@
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - wn-database-data:/var/lib/postgresql   # stock la base de données et assure sa persistance
+      - ./wn-database/init.sql:/docker-entrypoint-initdb.d/init.sql   # initialise au premier démarage le script init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  writer-back:
+    build: ./wn-rajar-ms_writer/writer-back      # va lire le Dockerfile dans ce dossier pour faire le premier build
+    ports:
+      - "3000:3000"           # SUPPRIMER EN PROD(à gauche ce qui est appelé par le navigateur, à droite ce qu'y est appelé par les conteneurs/environnement)
+    volumes:
+      - ./wn-rajar-ms_writer/writer-back:/app    # fait le reload du dossier sans avoir besoin de faire un nouveau build (hot-reload)
+      - writer-back-node_modules:/app/node_modules    # protège les node_modules pour éviter qu'ils se fassent écraser
+    env_file:
+      - ./wn-rajar-ms_writer/writer-back/.env   # injection des variables
+    command: npm run dev      # commande pour lancer le backend
+    depends_on:
+      db:
+        condition: service_healthy
+  
+  writer-front:
+    build: ./wn-rajar-ms_writer/writer-front
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./wn-rajar-ms_writer/writer-front:/app
+      - writer-front-node_modules:/app/node_modules
+    command: npm run dev
+    environment :
+      - VITE_API_URL=http://localhost:3000/api    # url du backend pour l'utiliser au frontend
+
+
+  reader-back:
+    build: ./wn-rajar-ms_reader/reader-back      # va lire le Dockerfile dans ce dossier pour faire le premier build
+    ports:
+      - "3001:3000"           # SUPPRIMER EN PROD (à gauche ce qui est appelé par le navigateur, à droite ce qu'y est appelé par les conteneurs/environnement)
+    volumes:
+      - ./wn-rajar-ms_reader/reader-back:/app    # fait le reload du dossier sans avoir besoin de faire un nouveau build (hot-reload)
+      - reader-back-node_modules:/app/node_modules
+    env_file:
+      - ./wn-rajar-ms_reader/reader-back/.env
+    command: npm run dev      # commande pour lancer le backend
+    depends_on:
+      db:
+        condition: service_healthy
+
+  reader-front:
+    build: ./wn-rajar-ms_reader/reader-front
+    ports:
+      - "5174:5173"
+    volumes:
+      - ./wn-rajar-ms_reader/reader-front:/app
+      - reader-front-node_modules:/app/node_modules
+    command: npm run dev
+    environment :
+      - VITE_API_URL=http://localhost:3001    # url du backend pour l'utiliser au frontend (utiliser le port des conteneurs)
+
+  
+volumes:
+  wn-database-data:
+  writer-back-node_modules:
+  writer-front-node_modules:
+  reader-back-node_modules:
+  reader-front-node_modules:

@@ -1,0 +1,20 @@
+services:
+  writer-back:
+    build: ./writer-back      # va lire le Dockerfile dans ce dossier pour faire le premier build
+    ports:
+      - "3000:3000"           # port backend local
+    volumes:
+      - ./writer-back:/app    # fait le reload du dossier sans avoir besoin de faire un nouveau build (hot-reload)
+    env_file:
+      - ./writer-back/.env   # injection des variables
+    command: npm run dev      # commande pour lancer le backend
+  
+  writer-front:
+    build: ./writer-front
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./writer-front:app
+    command: npm run dev
+    environment :
+      - VITE_API_URL=http://writer-back:3000/api    # url du backend pour l'utiliser au frontend

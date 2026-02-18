@@ -1,0 +1,40 @@
+.action-button {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: "Newsreader", serif;
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Bouton Modifier - Style secondaire */
+.action-button--edit {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.action-button--edit:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(41, 76, 121, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .action-button {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}

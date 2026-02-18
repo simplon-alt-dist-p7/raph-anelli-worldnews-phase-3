@@ -1,0 +1,36 @@
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  margin: 0 auto;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.main {
+  padding: 2rem 4rem;
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  #root {
+    max-width: 100%;
+  }
+
+  .main {
+    padding: 2rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 1rem;
+  }
+}

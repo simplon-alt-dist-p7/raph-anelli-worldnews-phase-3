@@ -1,0 +1,25 @@
+.footer {
+  background-color: var(--color-blue-dark);
+  padding: 2rem;
+  text-align: center;
+}
+
+.footer__text {
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--color-white);
+  margin-bottom: 0.25rem;
+}
+
+.footer__names {
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  color: var(--color-white);
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+}

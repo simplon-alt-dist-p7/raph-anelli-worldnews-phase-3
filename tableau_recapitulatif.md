@@ -1,0 +1,6 @@
+| Service          | Dossier Docker                      | Port interne (conteneur) | Port exposé (navigateur/host)         | Variable frontend pour le backend      | Notes importantes                                          |
+| ---------------- | ----------------------------------- | ------------------------ | ------------------------------------- | -------------------------------------- | ---------------------------------------------------------- |
+| **Reader-back**  | `./wn-rajar-ms_reader/reader-back`  | 3000                     | ❌ non exposé (optionnel pour Postman) | N/A                                    | Conteneur backend Node, accessible par `localhost:3001` |
+| **Reader-front** | `./wn-rajar-ms_reader/reader-front` | 5173                     | 5174                                  | `VITE_API_URL=http://localhost:3001` | React dev server, accès navigateur : `localhost:5174`      |
+| **Writer-back**  | `./wn-rajar-ms_writer/writer-back`  | 3000                     | ❌ non exposé (optionnel)              | N/A                                    | Conteneur backend Node, accessible par `localhost:3000` |
+| **Writer-front** | `./wn-rajar-ms_writer/writer-front` | 5173                     | 5173                                  | `VITE_API_URL=http://localhost:3000` | React dev server, accès navigateur : `localhost:5173`      |
