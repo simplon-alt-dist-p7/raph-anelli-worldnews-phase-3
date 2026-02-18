@@ -1,7 +1,8 @@
 // vi : permet de remplacer des fonctions et/ou des modules par des versions simulées pour les tests
-// describe : conteneur, sert à organiser/Hmmregrouper les tests, à structurer et à rendre la lecture claire
-// it : test individuel, avec à l'intérieur ce qu'on veut vérifier. P
-const { vi, describe, it } = require('vitest')
+// describe : conteneur, sert à organiser/regrouper les tests, à structurer et à rendre la lecture claire
+// it : test individuel, avec à l'intérieur ce qu'on veut vérifier
+// expect : premet la vérification du résultat d'un test
+const { vi, describe, it, expect } = require('vitest')
 
 // Création d'un mock de Prisma
 vi.mock('./../lib/prisma', () => { // Remplace tout le module Prisma importé par la classe par cette version mocké
@@ -18,8 +19,9 @@ vi.mock('./../lib/prisma', () => { // Remplace tout le module Prisma importé pa
 const ArticlesService = require('./articles');
 const articlesService = new ArticlesService();
 
-describe('ArticlesService - getById', () =>{
-    it("Récupération de l'objet article", () =>{
-        //Code à prévoir
+describe('ArticlesService - getById', () =>{    // Conteneur groupant les tests de getById
+    it("Appel de getById et retourne un article", async () =>{  // test individuel
+        const result = await articlesService.getById(1)
+        expect(result).toEqual({ id: 1, title: "Titre de l'article"})   // Comparaison entre le résultat obtenu et le résultat demandé
     })
 })
