@@ -64,8 +64,9 @@ describe("ArticleService", () => { // Conteneur groupant les tests
             categoryId: 1
         } as unknown; // On suspend le typage
 
+        vi.mocked(articleRepository.create).mockResolvedValue(mockArticle as Article);  //On fait en sorte que ça correspond un à objet Article
 
-        vi.mocked(articleRepository.create).mockResolvedValue(mockArticle as Article);  //On associe à nouveau avec Article
+        // Données valides
         const validData = {
             title: "Titre valide",
             subtitle: "Sous-titre valide",
@@ -76,6 +77,7 @@ describe("ArticleService", () => { // Conteneur groupant les tests
 
         const result = await articleService.createArticle(validData);
 
+        // Le résultat est le même que celui de l'article mocké
         expect(result).toEqual(mockArticle);
 
     });
