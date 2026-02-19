@@ -3,6 +3,8 @@
 // expect : premet la vérification du résultat d'un test
 import { describe, it, expect } from "vitest";
 import { articleService } from "./article.service.js";
+import { ValidationError } from "./../errors/ValidationError.js";
+
 
 
 describe("ArticleService", () => {
@@ -15,9 +17,19 @@ describe("ArticleService", () => {
             categoryId: 1,
         };
 
-        await expect(
-            articleService.createArticle(invalidData)
-        ).rejects.toThrow();
+        // await expect(
+        //     articleService.createArticle(invalidData)
+        // ).rejects.toThrow(ValidationError);
+
+        // await expect(
+        //     articleService.createArticle(invalidData)
+        // ).rejects.toThrow("Le titre est requis");
+
+        const promise = articleService.createArticle(invalidData);
+
+        await expect(promise).rejects.toThrow(ValidationError);
+        await expect(promise).rejects.toThrow("Le titre est requis");
+
 
 
     });
