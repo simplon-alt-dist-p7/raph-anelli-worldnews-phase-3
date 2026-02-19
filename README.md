@@ -14,9 +14,3 @@ Down les volumes et supprimer
 ```bash
 docker compose down -v
 ```
-
-
-Down les images et supprimer 
-```bash
-docker compose down -i
-```
