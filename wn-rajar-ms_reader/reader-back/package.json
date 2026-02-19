@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "dotenv -e .env.test -- vitest",
+    "test": "vitest",
     "dev": "nodemon server.js"
   },
   "author": "",
