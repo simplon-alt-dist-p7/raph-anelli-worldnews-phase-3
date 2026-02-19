@@ -204,5 +204,3 @@ INSERT INTO reader.t_article_comments (article_id, content, created_at) VALUES
 (5, 'À 40 années-lumière… quelqu’un sait si la fibre y arrive ?', '2025-12-14 10:05:00'),  
 (8, 'Une belle reconnaissance pour le cinéma français.', '2025-12-11 09:20:00'),
 (10, 'Réforme intéressante mais qui soulève encore beaucoup de questions.', '2025-12-09 13:45:00');
-
-CREATE DATABASE worldnews_test;
