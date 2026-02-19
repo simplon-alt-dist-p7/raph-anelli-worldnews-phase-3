@@ -8,6 +8,7 @@ services:
     volumes:
       - wn-database-data:/var/lib/postgresql   # stock la base de données et assure sa persistance
       - ./wn-database/init.sql:/docker-entrypoint-initdb.d/init.sql   # initialise au premier démarage le script init.sql
+      - ./wn-database/init-test.sql:/docker-entrypoint-initdb.d/init-test.sql
     ports:
       - "5432:5432"
     healthcheck:
