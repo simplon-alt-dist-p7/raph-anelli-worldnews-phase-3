@@ -9,3 +9,8 @@ Pour juste lancer le projet déjà build
 ```bash
 docker compose up
 ```
+
+Down les volumes et supprimer 
+```bash
+docker compose down -v
+```

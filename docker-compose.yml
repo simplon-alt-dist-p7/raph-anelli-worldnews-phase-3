@@ -15,7 +15,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
+  
   writer-back:
     build: ./wn-rajar-ms_writer/writer-back      # va lire le Dockerfile dans ce dossier pour faire le premier build
     ports:
