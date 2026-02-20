@@ -31,4 +31,27 @@ describe("ArticleController - getArticle", () => {
         expect(next).not.toHaveBeenCalled();    // On s'attend à ce que 'next' ne soit pas appelé
     });
 
+    it("Test avec id à 0 = retourne une erreur 400", async () => {
+        const req = {
+            params: { id: "0" }     // On met en paramètre un id = 0
+        } as any;
+
+        const res = {   // faux res, 
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn(),
+        } as any;
+
+        const next = vi.fn();
+
+        await articleController.getArticle(req, res, next);
+
+        expect(res.status).toHaveBeenCalledWith(400);
+
+        expect(res.json).toHaveBeenCalledWith({
+            error: "ID d'article invalide",
+        });
+
+        expect(next).not.toHaveBeenCalled();
+    });
+
 });
