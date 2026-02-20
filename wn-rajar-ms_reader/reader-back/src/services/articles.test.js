@@ -31,3 +31,14 @@ describe('ArticlesService - getById', () =>{    // Conteneur groupant les tests 
         })
     })
 })
+
+
+// indications pour la suite, pour getLastTenArticlesByMostRecent
+// Tester
+//  const categoriesFromArticles = await prisma.article.findMany({
+//       where: { delete_date: null }, //on ne prend que les articles non supprimés
+//       select: { category_id: true, category_title: true }, // on prend l'id et le title
+//       distinct: ['category_id'], // permet d'avoir une catégorie unique et évite les doublons
+//       orderBy: { category_title: 'asc' },
+//     });
+// Quand prisma fait le findMany, intercepter et modifier avec un tableau objet
