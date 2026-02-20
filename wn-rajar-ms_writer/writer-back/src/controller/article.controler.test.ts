@@ -19,6 +19,16 @@ describe("ArticleController - getArticle", () => {
         } as any;
 
         const next = vi.fn();   // mock de next, afin de vérifier s'il est appelé et avec quel argument
+
+        await articleController.getArticle(req, res, next);
+
+        expect(res.status).toHaveBeenCalledWith(400);   // On s'attend à ce que l'erreur 400 soit appelée
+
+        expect(res.json).toHaveBeenCalledWith({     // On s'attend à ce que ce message d'erreur a été appelé
+            error: "ID d'article manquant",
+        });
+
+        expect(next).not.toHaveBeenCalled();    // On s'attend à ce que 'next' ne soit pas appelé
     });
 
 });
