@@ -92,8 +92,62 @@ describe("ArticleController - getArticle", () => {
 
         expect(res.status).toHaveBeenCalledWith(200);   // On s'attends à un code HTTP 200
 
-        expect(res.json).toHaveBeenCalledWith({data: mockArticle}); // On s'attends à ce que ça renvoie l'article obtenu du service
+        expect(res.json).toHaveBeenCalledWith({ data: mockArticle }); // On s'attends à ce que ça renvoie l'article obtenu du service
 
         expect(next).not.toHaveBeenCalled();
+    });
+
+    it("Test d'article non trouvé - retourne un code 404", async () => {
+        const req = {
+            params: { id: "1" },
+        } as any;
+
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn(),
+        } as any;
+
+        const next = vi.fn();
+
+        vi.mocked(articleService.getArticleById).mockResolvedValue(null as any);    // La valeur mocké retrouvée est null
+
+        await articleController.getArticle(req, res, next);
+
+        expect(articleService.getArticleById).toHaveBeenCalledWith(1);
+
+        expect(res.status).toHaveBeenCalledWith(404);
+
+        expect(res.json).toHaveBeenCalledWith({
+            error: "Article non trouvé",
+        });
+
+        expect(next).not.toHaveBeenCalled();
+    });
+
+    it("Test du catch - Devrait appeler next (error)", async () => {
+        const req = {
+            params: { id: "1" },
+        } as any;
+
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn(),
+        } as any;
+
+        const next = vi.fn();
+
+        const mockError = new Error("Database failure");
+
+        vi.mocked(articleService.getArticleById).mockRejectedValue(mockError);  // Retourne une promesse rejetée, via mockError
+
+        await articleController.getArticle(req, res, next);
+
+        expect(articleService.getArticleById).toHaveBeenCalledWith(1);
+
+        expect(next).toHaveBeenCalledWith(mockError);
+
+        expect(res.status).not.toHaveBeenCalled();
+
+        expect(res.json).not.toHaveBeenCalled();
     });
 });
