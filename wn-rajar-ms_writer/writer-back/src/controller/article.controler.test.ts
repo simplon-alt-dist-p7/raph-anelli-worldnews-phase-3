@@ -5,6 +5,15 @@
 // beforeEach : permet d'exécuter quelque chose avant chaque test dans un describe
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
+vi.mock("../services/article.service.js", () => {   // On mock le service article
+    return {
+        articleService: {   // On importe le service mocké
+            getArticleById: vi.fn(),
+        },
+    };
+});
+import { articleService } from "../services/article.service.js";
+
 import { articleController } from "./article.controller.js";
 
 describe("ArticleController - getArticle", () => {
@@ -54,4 +63,37 @@ describe("ArticleController - getArticle", () => {
         expect(next).not.toHaveBeenCalled();
     });
 
+    it("Test de succès - doit retourner un code 200 si l'id de l'article est valide", async () => {
+        const req = {
+            params: { id: "1" },
+        } as any;
+
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn(),
+        } as any;
+
+        const next = vi.fn();
+
+        const mockArticle = {
+            id: 1,
+            title: "Titre test",
+            subtitle: "Sous-titre test",
+            subhead: "Chapeau test",
+            body: "Contenu test",
+            categoryId: 1,
+        };
+
+        vi.mocked(articleService.getArticleById).mockResolvedValue(mockArticle as any);
+
+        await articleController.getArticle(req, res, next);
+
+        expect(articleService.getArticleById).toHaveBeenCalledWith(1);  // On s'attends à ce que la fonction a été appelé avec id = 1 et que le parseInt a fonctionné, et que le controller a bien joué son rôle
+
+        expect(res.status).toHaveBeenCalledWith(200);   // On s'attends à un code HTTP 200
+
+        expect(res.json).toHaveBeenCalledWith({data: mockArticle}); // On s'attends à ce que ça renvoie l'article obtenu du service
+
+        expect(next).not.toHaveBeenCalled();
+    });
 });
