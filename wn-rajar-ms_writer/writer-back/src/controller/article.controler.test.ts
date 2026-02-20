@@ -123,4 +123,31 @@ describe("ArticleController - getArticle", () => {
 
         expect(next).not.toHaveBeenCalled();
     });
+
+    it("Test du catch - Devrait appeler next (error)", async () => {
+        const req = {
+            params: { id: "1" },
+        } as any;
+
+        const res = {
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn(),
+        } as any;
+
+        const next = vi.fn();
+
+        const mockError = new Error("Database failure");
+
+        vi.mocked(articleService.getArticleById).mockRejectedValue(mockError);  // Retourne une promesse rejetée, via mockError
+
+        await articleController.getArticle(req, res, next);
+
+        expect(articleService.getArticleById).toHaveBeenCalledWith(1);
+
+        expect(next).toHaveBeenCalledWith(mockError);
+
+        expect(res.status).not.toHaveBeenCalled();
+
+        expect(res.json).not.toHaveBeenCalled();
+    });
 });
