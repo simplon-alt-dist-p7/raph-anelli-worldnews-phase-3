@@ -5,6 +5,8 @@ import { Category } from "../models/category.model.js";
 
 dotenv.config();
 const isTestEnv = process.env.NODE_ENV === "test";    // Crée un booléen : true si NOD_ENV est égal à test, sinon il sera à false
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("Using TEST DB:", isTestEnv);
 
 // Validation des variables d'environnement obligatoires
 const requiredEnvVars = [
