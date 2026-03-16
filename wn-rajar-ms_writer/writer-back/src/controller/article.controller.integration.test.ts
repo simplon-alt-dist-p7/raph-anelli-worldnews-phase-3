@@ -45,3 +45,22 @@ describe("Test d'intégration : GET /articles/:id ", () => {
         expect(response.body).toHaveProperty("data");
     });
 });
+
+describe("Test d'intégration : POST /articles", () => {
+    it("Teste la création d'un nouvel article avec succès", async () => {
+        const newArticle = {
+            title: "Article test integration",
+            subtitle: "Sous-titre test integration",
+            subhead: "Chapeau test integration",
+            body: "Contenu test integration",
+            categoryId: 1
+        };
+
+        const response = await request(app)
+            .post("/api/articles")
+            .send(newArticle);
+
+        expect(response.status).toBe(201);
+        expect(response.body).toHaveProperty("data");
+    });
+});
