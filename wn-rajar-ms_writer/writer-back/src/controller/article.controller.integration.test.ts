@@ -3,7 +3,8 @@
 // expect : premet la vérification du résultat d'un test
 // beforeAll : exécute du code avant tous les tests du fichier
 // afterAll : exécute du code après tous les tests du fichier
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
+// beforeEach : permet d'exécuter quelque chose avant chaque test dans un describe
+import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
 import { connectDB, AppDataSource } from "../config/database.js";
 import request from "supertest";
 import { app } from "../index.js";
@@ -11,6 +12,13 @@ import { app } from "../index.js";
 // Avant les tests, on se connecte à la base de données
 beforeAll(async () => {
     await connectDB();
+});
+
+// Suppression de toutes les lignes au dela de celles initialisés au départ
+beforeEach(async () => {
+  await AppDataSource.query(
+    'DELETE FROM "writer"."t_articles" WHERE id > 10'
+  );
 });
 
 // Après les tests, ferme la connexion
