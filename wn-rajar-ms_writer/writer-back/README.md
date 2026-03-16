@@ -94,3 +94,15 @@ BACK/
 - **TypeScript** : Superset typé de JavaScript
 - **dotenv** : Gestion des variables d'environnement
 - **ts-node-dev** : Rechargement automatique en développement
+
+## Tests
+
+### package.json
+
+Pour exécuter les tests de manière simple, on ajoute dans les scripts de "package.json" la ligne suivante :
+```json
+"test": "NODE_ENV=test vitest run --reporter=verbose",
+```
+
+On change la variable NODE_ENV en test, afin que database.ts se connecte sur la base de données de test?
+"--reporter=verbose" permet une meilleure lisibilité du test dans le terminal.
