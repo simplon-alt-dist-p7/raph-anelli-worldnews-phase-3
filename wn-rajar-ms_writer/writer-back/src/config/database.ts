@@ -4,6 +4,9 @@ import { Article } from "../models/article.model.js";
 import { Category } from "../models/category.model.js";
 
 dotenv.config();
+const isTestEnv = process.env.NODE_ENV === "test";    // Crée un booléen : true si NOD_ENV est égal à test, sinon il sera à false
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("Using TEST DB:", isTestEnv);
 
 // Validation des variables d'environnement obligatoires
 const requiredEnvVars = [
@@ -21,11 +24,11 @@ for (const envVar of requiredEnvVars) {
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: process.env.DB_HOST!,
-  port: Number(process.env.DB_PORT),
-  database: process.env.DB_NAME!,
-  username: process.env.DB_USER!,
-  password: process.env.DB_PASSWORD!,
+  host: isTestEnv ? process.env.DB_HOST_TEST! : process.env.DB_HOST!,   // Si isEnvTest = true, on utilise la variable de test. Sinon celle de developpement
+  port: Number(isTestEnv ? process.env.DB_PORT_TEST : process.env.DB_PORT),
+  database: isTestEnv ? process.env.DB_NAME_TEST! : process.env.DB_NAME!,
+  username: isTestEnv ? process.env.DB_USER_TEST! : process.env.DB_USER!,
+  password: isTestEnv ? process.env.DB_PASSWORD_TEST! : process.env.DB_PASSWORD!,
 
   // Liste de toutes vos entities
   entities: [Article, Category],
