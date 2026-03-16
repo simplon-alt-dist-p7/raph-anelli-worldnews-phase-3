@@ -29,3 +29,12 @@ describe("Test du endpoint health", () => {     // test de GET /health : on vér
     expect(response.body.status).toBe("ok");
   });
 });
+
+// Test d'une première route GET
+describe("Test d'intégration : GET /articles/:id ", () => {
+  it("Retourne un code 404 si l'article n'existe pas", async () => {
+    const response = await request(app).get("/api/articles/999999");
+
+    expect(response.status).toBe(404);
+  });
+});
