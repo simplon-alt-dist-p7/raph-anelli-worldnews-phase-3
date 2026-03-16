@@ -10,31 +10,38 @@ import { app } from "../index.js";
 
 // Avant les tests, on se connecte à la base de données
 beforeAll(async () => {
-  await connectDB();
+    await connectDB();
 });
 
 // Après les tests, ferme la connexion
 afterAll(async () => {
-  if (AppDataSource.isInitialized) {
-    await AppDataSource.destroy();
-  }
+    if (AppDataSource.isInitialized) {
+        await AppDataSource.destroy();
+    }
 });
 
 // Premier test simple
 describe("Test du endpoint health", () => {     // test de GET /health : on vérifie que la route renvoie le code http 200
-  it("Doit renvoyer le status : ok", async () => {
-    const response = await request(app).get("/health");
+    it("Doit renvoyer le status : ok", async () => {
+        const response = await request(app).get("/health");
 
-    expect(response.status).toBe(200);
-    expect(response.body.status).toBe("ok");
-  });
+        expect(response.status).toBe(200);
+        expect(response.body.status).toBe("ok");
+    });
 });
 
 // Test d'une première route GET
 describe("Test d'intégration : GET /articles/:id ", () => {
-  it("Retourne un code 404 si l'article n'existe pas", async () => {
-    const response = await request(app).get("/api/articles/999999");
+    it("Retourne un code 404 si l'article n'existe pas", async () => {
+        const response = await request(app).get("/api/articles/999999");
 
-    expect(response.status).toBe(404);
-  });
+        expect(response.status).toBe(404);
+    });
+
+    it("Retourne un article s'il le trouve et un code 200", async () => {
+        const response = await request(app).get("/api/articles/1");
+
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty("data");
+    });
 });
