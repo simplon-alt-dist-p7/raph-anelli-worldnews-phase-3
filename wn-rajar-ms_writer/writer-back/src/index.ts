@@ -9,7 +9,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
 
-const app = express();
+export const app = express();   // export pour pouvoir l'utiliser dans les tests
 const PORT = process.env.PORT;
 
 // Configuration CORS
@@ -52,4 +52,6 @@ const startServer = async () => {
   }
 };
 
-startServer();
+if (process.env.NODE_ENV !== "test") {  // On vérifie qu'on n'est pas dans un environnement de test avant de lancer le serveur
+  startServer();
+}
