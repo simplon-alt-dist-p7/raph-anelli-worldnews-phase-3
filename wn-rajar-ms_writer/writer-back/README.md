@@ -101,8 +101,9 @@ BACK/
 
 Pour exécuter les tests de manière simple, on ajoute dans les scripts de "package.json" la ligne suivante :
 ```json
-"test": "NODE_ENV=test vitest run --reporter=verbose",
+"test": "cross-env NODE_ENV=test vitest run --reporter=verbose",
 ```
 
-On change la variable NODE_ENV en test, afin que database.ts se connecte sur la base de données de test?
+On change la variable NODE_ENV du fichier .env en test, afin que database.ts se connecte sur la base de données de test.
+Important : "cross-env" est un package permettant de rendre compatible les syntaxes sous plusieurs systèmes d'exploitation. Sans ça, NODE_ENV ne sera pas reconnu si vous faites les tests sous Windows.
 "--reporter=verbose" permet une meilleure lisibilité du test dans le terminal.
