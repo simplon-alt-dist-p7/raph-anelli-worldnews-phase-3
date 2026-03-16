@@ -4,6 +4,7 @@ import { Article } from "../models/article.model.js";
 import { Category } from "../models/category.model.js";
 
 dotenv.config();
+const isTestEnv = process.env.NODE_ENV === "test";
 
 // Validation des variables d'environnement obligatoires
 const requiredEnvVars = [
