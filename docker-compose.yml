@@ -87,6 +87,7 @@ services:
   
 volumes:
   wn-database-data:
+  wn-database-test-data:
   writer-back-node_modules:
   writer-front-node_modules:
   reader-back-node_modules:
