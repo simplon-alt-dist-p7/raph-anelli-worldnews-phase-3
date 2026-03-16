@@ -16,9 +16,9 @@ beforeAll(async () => {
 
 // Suppression de toutes les lignes au dela de celles initialisés au départ
 beforeEach(async () => {
-  await AppDataSource.query(
-    'DELETE FROM "writer"."t_articles" WHERE id > 10'
-  );
+    await AppDataSource.query(
+        'DELETE FROM "writer"."t_articles" WHERE id > 10'
+    );
 });
 
 // Après les tests, ferme la connexion
@@ -70,5 +70,8 @@ describe("Test d'intégration : POST /articles", () => {
 
         expect(response.status).toBe(201);
         expect(response.body).toHaveProperty("data");
+        expect(response.body.data).toHaveProperty("id");
+        expect(response.body.data.title).toBe("Article test integration");
+        expect(response.body.data.subtitle).toBe("Sous-titre test integration");
     });
 });
