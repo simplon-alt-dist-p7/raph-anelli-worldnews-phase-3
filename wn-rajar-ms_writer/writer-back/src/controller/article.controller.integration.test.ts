@@ -1,9 +1,24 @@
 // describe : conteneur, sert à organiser/regrouper les tests, à structurer et à rendre la lecture claire
 // it : test individuel, avec à l'intérieur ce qu'on veut vérifier
 // expect : premet la vérification du résultat d'un test
-import { describe, it, expect } from "vitest";
+// beforeAll : exécute du code avant tous les tests du fichier
+// afterAll : exécute du code après tous les tests du fichier
+import { describe, it, expect, beforeAll, afterAll } from "vitest";
+import { connectDB, AppDataSource } from "../config/database.js";
 import request from "supertest";
 import { app } from "../index.js";
+
+// Avant les tests, on se connecte à la base de données
+beforeAll(async () => {
+  await connectDB();
+});
+
+// Après les tests, ferme la connexion
+afterAll(async () => {
+  if (AppDataSource.isInitialized) {
+    await AppDataSource.destroy();
+  }
+});
 
 // Premier test simple
 describe("Test du endpoint health", () => {     // test de GET /health : on vérifie que la route renvoie le code http 200
