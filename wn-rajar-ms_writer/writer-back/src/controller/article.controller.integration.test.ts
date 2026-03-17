@@ -54,6 +54,7 @@ describe("Test d'intégration : GET /articles/:id ", () => {
     });
 });
 
+// Test route POST
 describe("Test d'intégration : POST /articles", () => {
     it("Teste la création d'un nouvel article avec succès", async () => {
         const newArticle = {
@@ -64,14 +65,47 @@ describe("Test d'intégration : POST /articles", () => {
             categoryId: 1
         };
 
+        // Réponse de la requête
+        // On envoie les données de newArticle en POST sur la route '/api/articles' pour créer l'article
+        const response = await request(app)
+            .post("/api/articles")
+            .send(newArticle);
+
+        expect(response.status).toBe(201);  // Réponse status 201 attendu
+        expect(response.body).toHaveProperty("data");   // On s'attend que le body a une propriété "data"
+        expect(response.body.data).toHaveProperty("id");    // On s'attend à ce que dans data, il y ait une propriété "id"
+        // On contrôle le contenu du "title" et du "subtitle" pour voir s'ils sont corrects
+        expect(response.body.data.title).toBe("Article test integration");
+        expect(response.body.data.subtitle).toBe("Sous-titre test integration");
+    });
+
+    it("Test de création d'un article puis voir si on le retrouve en base de données", async () => {
+        const newArticle = {
+            title: "Second article test integration",
+            subtitle: "Second sous-titre test integration",
+            subhead: "Second chapeau test integration",
+            body: "Second contenu test integration",
+            categoryId: 1
+        };
+
         const response = await request(app)
             .post("/api/articles")
             .send(newArticle);
 
         expect(response.status).toBe(201);
         expect(response.body).toHaveProperty("data");
-        expect(response.body.data).toHaveProperty("id");
-        expect(response.body.data.title).toBe("Article test integration");
-        expect(response.body.data.subtitle).toBe("Sous-titre test integration");
+
+        const createdId = response.body.data.id;    // On récupère l'id
+        expect(createdId).toBeDefined();    // On vérifie qu'il existe bien
+        expect(typeof createdId).toBe("number");    // On vérifie que ce soit bien un nombre
+
+        // On voit si on retrouve l'article en base de données via l'id qu'on a récupéré
+        const getResponse = await request(app)
+            .get(`/api/articles/${createdId}`);
+
+        expect(getResponse.status).toBe(200);
+        expect(getResponse.body).toHaveProperty("data");
+        expect(getResponse.body.data.title).toBe("Second article test integration");
+        expect(getResponse.body.data.subtitle).toBe("Second sous-titre test integration");
     });
 });
