@@ -126,5 +126,50 @@ describe("Test d'intégration : POST /articles", () => {
         expect(response.body).toHaveProperty("error");
         expect(response.body.error).toContain("Tous les champs sont requis (title, subtitle, subhead, body, categoryId)");
     });
-        
+
 });
+
+describe("Test d'intégration : PUT /articles/:id", () => {
+    // Pour le test
+    /* Pour le test de modification d'un article, on va :
+        - Créer un nouvel article
+        - Le récupérer via un GET
+        - Modifier cet article
+        Cela permet d'effectuer le test, même si la table de la base de données est vide
+    */
+    it("Test de modification d'un article", async () => {
+        // Création d'un nouvel article pour le test
+        const newArticle = {
+            title: "Article à modifier",
+            subtitle: "Sous-titre à modifier",
+            subhead: "Chapeau à modifier",
+            body: "Corps à modifier",
+            categoryId: 1
+        };
+
+        const response = await request(app)
+            .post("/api/articles")
+            .send(newArticle);
+
+        // Vérification que la création a bien fonctionnée
+        expect(response.status).toBe(201);
+        expect(response.body).toHaveProperty("data");
+
+        const createdId = response.body.data.id;    // On récupère l'id
+        expect(createdId).toBeDefined();    // On vérifie qu'il existe bien
+        expect(typeof createdId).toBe("number");    // On vérifie que ce soit bien un nombre
+
+        // Eléments d'uptade de l'article
+        const updatedArticle = {
+            title: "Titre mis à jour",
+            subtitle: "Sous-titre mis à jour"
+        };
+
+        const updateResponse = await request(app)
+            .patch(`/api/articles/${createdId}`)
+            .send(updatedArticle);
+
+        expect(updateResponse.status).toBe(200);
+        expect(updateResponse.body).toHaveProperty("data");
+    });
+})
