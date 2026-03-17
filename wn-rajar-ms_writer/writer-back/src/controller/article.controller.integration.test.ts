@@ -137,7 +137,7 @@ describe("Test d'intégration : PUT /articles/:id", () => {
         - Modifier cet article
         Cela permet d'effectuer le test, même si la table de la base de données est vide
     */
-    it("Test de modification d'un article", async () => {
+    it("Modification avec succès", async () => {
         // Création d'un nouvel article pour le test
         const newArticle = {
             title: "Article à modifier",
@@ -171,5 +171,37 @@ describe("Test d'intégration : PUT /articles/:id", () => {
 
         expect(updateResponse.status).toBe(200);
         expect(updateResponse.body).toHaveProperty("data");
+    });
+
+    it("ID article non trouvé pour modificaion", async () => {
+        // Eléments d'uptade de l'article
+        const updatedArticle = {
+            title: "Titre mis à jour",
+            subtitle: "Sous-titre mis à jour"
+        };
+
+        // Tentative de mise à jour d'un article inexistant
+        const updateResponse = await request(app)
+            .patch(`/api/articles/9999`)
+            .send(updatedArticle);
+
+        expect(updateResponse.status).toBe(404);
+        expect(updateResponse.body).toEqual({ error: "Article non trouvé"});
+    });
+
+    it("ID invalide pour modification", async () => {
+        // Eléments d'uptade de l'article
+        const updatedArticle = {
+            title: "Titre mis à jour",
+            subtitle: "Sous-titre mis à jour"
+        };
+
+        // Tentative de mise à jour avec un ID invalide
+        const updateResponse = await request(app)
+            .patch(`/api/articles/0`)
+            .send(updatedArticle);
+
+        expect(updateResponse.status).toBe(400);
+        expect(updateResponse.body).toEqual({ error: "ID d'article invalide"});
     });
 })
