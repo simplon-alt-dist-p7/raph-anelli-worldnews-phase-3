@@ -204,4 +204,39 @@ describe("Test d'intégration : PUT /articles/:id", () => {
         expect(updateResponse.status).toBe(400);
         expect(updateResponse.body).toEqual({ error: "ID d'article invalide"});
     });
+
+    it("Tentative de modification avec titre vide : doit retourner une erreur 400", async () => {
+        // Création d'un nouvel article pour le test
+        const newArticle = {
+            title: "Article à modifier",
+            subtitle: "Sous-titre à modifier",
+            subhead: "Chapeau à modifier",
+            body: "Corps à modifier",
+            categoryId: 1
+        };
+
+        const response = await request(app)
+            .post("/api/articles")
+            .send(newArticle);
+
+        // Vérification que la création a bien fonctionnée
+        expect(response.status).toBe(201);
+        expect(response.body).toHaveProperty("data");
+
+        const createdId = response.body.data.id;    // On récupère l'id
+        expect(createdId).toBeDefined();    // On vérifie qu'il existe bien
+        expect(typeof createdId).toBe("number");    // On vérifie que ce soit bien un nombre
+
+        // Update avec un titre vide
+        const updatedArticle = {
+            title: ""
+        };
+
+        const updateResponse = await request(app)
+            .patch(`/api/articles/${createdId}`)
+            .send(updatedArticle);
+
+        expect(updateResponse.status).toBe(400);
+        expect(updateResponse.body.message).toBe("Le titre ne peut pas être vide"); // On s'attends à ce que le message du status error soit ça
+    });
 })
