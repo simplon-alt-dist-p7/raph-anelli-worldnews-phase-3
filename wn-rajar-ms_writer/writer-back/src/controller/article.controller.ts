@@ -27,14 +27,6 @@ class ArticleController {
         data: newArticle,
       });
     } catch (error) {
-      // console.error("Erreur lors de la création de l'article:", error);
-      // if (error instanceof Error) {
-      //   res.status(400).json({
-      //     error: error.message,
-      //   });
-      //   return;
-      // }
-      // res.status(500).json({ error: "Erreur interne du serveur" });
       next(error);
     }
   }
@@ -70,7 +62,6 @@ class ArticleController {
         data: article,
       });
     } catch (error) {
-      // res.status(500).json({error: "Erreur interne du serveur"});
       next(error);
     }
   }
@@ -110,15 +101,6 @@ class ArticleController {
         data: updatedArticle,
       });
     } catch (error) {
-      // console.error("Erreur lors de la mise à jour de l'article:", error);
-
-      // if (error instanceof Error) {
-      //   res.status(400).json({
-      //     error: error.message,
-      //   });
-      //   return;
-      // }
-      // res.status(500).json({error: "Erreur interne du serveur"});
       next(error);
     }
   }
