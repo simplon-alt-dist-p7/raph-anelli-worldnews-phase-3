@@ -108,4 +108,23 @@ describe("Test d'intégration : POST /articles", () => {
         expect(getResponse.body.data.title).toBe("Second article test integration");
         expect(getResponse.body.data.subtitle).toBe("Second sous-titre test integration");
     });
+
+    it("Test de création d'un article avec un champ manquant (erreur 400 attendue)", async () => {
+        const newArticle = {
+            title: "Article test erreur 400",
+            subtitle: "",
+            subhead: "Article test erreur 400",
+            body: "Article test erreur 400",
+            categoryId: 1
+        };
+
+        const response = await request(app)
+            .post("/api/articles")
+            .send(newArticle);
+
+        expect(response.status).toBe(400);
+        expect(response.body).toHaveProperty("error");
+        expect(response.body.error).toContain("Tous les champs sont requis (title, subtitle, subhead, body, categoryId)");
+    });
+        
 });
