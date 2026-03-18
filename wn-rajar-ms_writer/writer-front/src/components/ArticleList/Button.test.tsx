@@ -34,5 +34,8 @@ describe("Test de EditButton", () => {
 
         // Vérifie que l'élément existe
         expect(button).toBeInTheDocument();
+        
+        // Vérifie que la navigation est appelée une seule fois
+        expect(mockNavigate).toHaveBeenCalledTimes(1);
     });
 });
