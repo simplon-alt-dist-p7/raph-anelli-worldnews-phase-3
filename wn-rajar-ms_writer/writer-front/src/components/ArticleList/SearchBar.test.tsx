@@ -57,9 +57,32 @@ describe("Test de la barre de recherche", () => {
 
         const input = screen.getByPlaceholderText("Rechercher un article...");
 
-        await userEvent.type(input, "Technologie"); 
+        await userEvent.type(input, "Technologie");
 
         // On vérifie si l'input a la valeure attendue
         expect(input).toHaveValue("Technologie");
+    });
+
+    it("Test affichage du bouton clear et le déclenche correctement", async () => {
+        const mockOnQueryChange = vi.fn();
+        const mockOnSearch = vi.fn();   // Mock de onSearch qui lance la recherche
+
+        render(
+            <SearchBar
+                searchBar={{ query: "React" }}
+                onQueryChange={mockOnQueryChange}
+                onSearch={mockOnSearch}
+            />
+        );
+
+        const clearButton = screen.getByLabelText("Effacer la recherche");  // On cherche le label avec le text correspondant
+
+        expect(clearButton).toBeInTheDocument();
+
+        // 👆 clic utilisateur
+        await userEvent.click(clearButton); // On attend le clic utilisateur
+
+        expect(mockOnQueryChange).toHaveBeenCalledWith(""); // On vérifie que onQueryChange est vide
+        expect(mockOnSearch).toHaveBeenCalled();    // La recherche a bien été déclanchée
     });
 })
