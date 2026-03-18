@@ -66,3 +66,11 @@ Chacune de ces actions est individuelle et est possible via un bouton  sur les c
 ### 🗑️ Activer/désactiver individuellement chaque article
 
 On ne supprime pas les articles, au cas où le rédacteur souhaite garder une trace de chaque article, y compris ceux "supprimés". A la place, il est possible d'activer ou de désactiver l'article. La principale conséquence est que les articles désactivés ne seront pas visibles du côté des lecteurs (voir le projet correspondant).
+
+## Tests
+
+Pour les tests du front-end, la dépendance Vitest est installé, avec les librairies suivantes :
+- @testing-library/react : simule l'affichage du composant
+- @testing-library/jest-dom : pour les assertions DOM (par exemple : expect(button).toBeInTheDocument())
+- @testing-library/user-event : afin de tester les interactions de l'utilisateur
+- jsdom → pour simuler un navigateur lors des tests
