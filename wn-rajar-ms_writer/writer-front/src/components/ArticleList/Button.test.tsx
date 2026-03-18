@@ -19,7 +19,11 @@ vi.mock("react-router-dom", async () => {
 });
 
 describe("Test de EditButton", () => {
-    it("Doit afficher le bouton Modifier et que la navigation est bien faite", async() => {
+    beforeEach(() => {
+        mockNavigate.mockClear();
+    });
+    
+    it("Doit afficher le bouton Modifier et que la navigation est bien faite", async () => {
         // Affiche le composant dans un faux DOM
         render(
             <MemoryRouter>
@@ -34,8 +38,22 @@ describe("Test de EditButton", () => {
 
         // Vérifie que l'élément existe
         expect(button).toBeInTheDocument();
-        
+
         // Vérifie que la navigation est appelée une seule fois
+        expect(mockNavigate).toHaveBeenCalledTimes(1);
+    });
+
+    it("Navigation vers la bonne page avec un ID différent", async () => {
+        render(
+            <MemoryRouter>
+                <EditButton articleId={42} />
+            </MemoryRouter>
+        );
+
+        const button = screen.getByText("Modifier");
+        await userEvent.click(button);
+
+        expect(mockNavigate).toHaveBeenCalledWith("/articles/42/edit");
         expect(mockNavigate).toHaveBeenCalledTimes(1);
     });
 });
