@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 import userEvent from "@testing-library/user-event";    // Simule les actions réelles d'un utilisateur
 import { vi } from "vitest"; //permet de remplacer des fonctions et/ou des modules par des versions simulées pour les tests
+import { useState } from "react";
 
 describe("Test de la barre de recherche", () => {
     it("Affichage du champ de recherche", async () => {
@@ -35,6 +36,30 @@ describe("Test de la barre de recherche", () => {
 
         await userEvent.type(input, "Technologie");   // Simule un utilisateur qui tape "Technologie" dans la barre de recherche
 
-        expect(mockOnQueryChange).toHaveBeenCalled();   // On vérifie que la fonction a été appelée au moins une fois
+        expect(mockOnQueryChange).toHaveBeenLastCalledWith("e"); // On vérifie que le dernier appel de la fonction a été fait avec le "e" de technologie
+    });
+
+    // Tester la recherche sur un mot complet
+    it("Test de onQueryChange avec la valeur cumulée", async () => {
+        // Simulation d'un parent React
+        const Wrapper = () => {
+            const [query, setQuery] = useState("");
+            return (
+                <SearchBar
+                    searchBar={{ query }}
+                    onQueryChange={setQuery}
+                    onSearch={() => { }}
+                />
+            )
+        };
+
+        render(<Wrapper />);
+
+        const input = screen.getByPlaceholderText("Rechercher un article...");
+
+        await userEvent.type(input, "Technologie"); 
+
+        // On vérifie si l'input a la valeure attendue
+        expect(input).toHaveValue("Technologie");
     });
 })
