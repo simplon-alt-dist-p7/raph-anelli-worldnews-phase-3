@@ -38,6 +38,7 @@ async function getArticleById(req, res) {
 
     res.status(200).json(article);
   } catch (e) {
+    console.error(e);
     res.status(500).json({ error: "Erreur interne du serveur" });
   }
 }

@@ -15,5 +15,5 @@ pre-commit:
 
     verification_reader_back:
       root: "wn-rajar-ms_reader/reader-back"
-      run: node --check server.js
+      run: npx eslint .
 
