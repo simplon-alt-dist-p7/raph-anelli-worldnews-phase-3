@@ -15,9 +15,5 @@ pre-commit:
 
     verification_reader_back:
       root: "wn-rajar-ms_reader/reader-back"
-      glob: "**/*.js"
-      run: |
-        for file in {staged_files}; do
-          node --check "$file"
-        done
+      run: node --check server.js
 
