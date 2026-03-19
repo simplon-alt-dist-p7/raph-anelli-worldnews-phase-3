@@ -91,3 +91,10 @@ npm install -D @playwright/test
 
 npx playwright install
 ```
+
+Pour lancer les tests :
+
+```bash
+npm run test:e2e
+```
+Script configuré dans le fichier package.json
