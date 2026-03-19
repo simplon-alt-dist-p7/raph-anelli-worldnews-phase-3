@@ -7,12 +7,8 @@ pre-commit:
       run: npx tsc --noEmit
 
     verification_writer_front:
-      root: "wn-rajar-ms_writer/writer-front/"
-      glob: "**/*.{ts,tsx,jsx}"
-      run: |
-        for file in {staged_files}; do
-          npx tsc --jsx react-jsx --strict --noEmit "$file"
-        done
+      root: "wn-rajar-ms_writer/writer-front"
+      run: npx tsc --noEmit
     
     verification_reader_front:
       root: "wn-rajar-ms_reader/reader-front"
