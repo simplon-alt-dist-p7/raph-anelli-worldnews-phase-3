@@ -92,7 +92,7 @@ describe("Test de la barre de recherche", () => {
 
         render(
             <SearchBar
-                searchBar={{ query: "React" }}
+                searchBar={{ query: "Technologie" }}
                 onQueryChange={() => { }}
                 onSearch={mockOnSearch}
             />
