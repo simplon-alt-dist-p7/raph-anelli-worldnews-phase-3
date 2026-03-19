@@ -22,3 +22,4 @@ pre-push:
     test_writer_back:
       root: "wn-rajar-ms_reader/reader-front"
       run: npm run test
+      always_run: true
