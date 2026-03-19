@@ -69,8 +69,25 @@ On ne supprime pas les articles, au cas où le rédacteur souhaite garder une tr
 
 ## Tests
 
+### Tests unitaires de composant
 Pour les tests du front-end, la dépendance Vitest est installé, avec les librairies suivantes :
 - @testing-library/react : simule l'affichage du composant
 - @testing-library/jest-dom : pour les assertions DOM (par exemple : expect(button).toBeInTheDocument())
 - @testing-library/user-event : afin de tester les interactions de l'utilisateur
 - jsdom → pour simuler un navigateur lors des tests
+
+Commande pour effectuer les tests : 
+```bash
+npm run test
+```
+Script configuré dans le fichier package.json
+
+### Tests End-to-End
+
+Pour effectuer les tests End-to-End (E2E), j'ai installé le framework de test Playwright.
+
+```bash
+npm install -D @playwright/test
+
+npx playwright install
+```
