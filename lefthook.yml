@@ -20,7 +20,7 @@ pre-commit:
 pre-push:
   commands:
     test_writer_back:
-      run: bash -c "cd wn-rajar-ms_writer/writer-back && npm run test"
+      run: npm --prefix wn-rajar-ms_writer/writer-back run test
       always_run: true
     
     test_debug:
