@@ -85,4 +85,23 @@ describe("Test de la barre de recherche", () => {
         expect(mockOnQueryChange).toHaveBeenCalledWith(""); // On vérifie que onQueryChange est vide
         expect(mockOnSearch).toHaveBeenCalled();    // La recherche a bien été déclanchée
     });
+
+    // Tester le bouton Rechercher et le déclanchement de onSearch
+    it("Test de onSearch lors du submit", async () => {
+        const mockOnSearch = vi.fn();
+
+        render(
+            <SearchBar
+                searchBar={{ query: "Technologie" }}
+                onQueryChange={() => { }}
+                onSearch={mockOnSearch}
+            />
+        );
+
+        const button = screen.getByRole("button", { name: "Rechercher" });  // getByRole trouve le button qui a le texte "Rechercher"
+
+        await userEvent.click(button);
+
+        expect(mockOnSearch).toHaveBeenCalled();
+    });
 })
