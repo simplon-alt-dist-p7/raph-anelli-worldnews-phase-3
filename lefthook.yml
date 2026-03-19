@@ -8,7 +8,7 @@ pre-commit:
 
     verification_writer_front:
       root: "wn-rajar-ms_writer/writer-front"
-      run: npx tsc --noEmit
+      run: npx tsc -b
     
     verification_reader_front:
       root: "wn-rajar-ms_reader/reader-front"
