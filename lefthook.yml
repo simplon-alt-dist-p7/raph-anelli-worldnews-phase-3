@@ -20,7 +20,8 @@ pre-commit:
 pre-push:
   commands:
     test_writer_back:
-      run: npm --prefix wn-rajar-ms_writer/writer-back run test
+      root: "wn-rajar-ms_reader/reader-front"
+      run: npm run test
       always_run: true
     
     test_debug:
