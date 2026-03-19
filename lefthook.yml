@@ -11,8 +11,7 @@ pre-commit:
     
     verification_reader_front:
       root: "wn-rajar-ms_reader/reader-front"
-      glob: "**/*.{js,jsx}"
-      run: npx eslint {staged_files}
+      run: npx eslint .
 
     verification_reader_back:
       root: "wn-rajar-ms_reader/reader-back"
