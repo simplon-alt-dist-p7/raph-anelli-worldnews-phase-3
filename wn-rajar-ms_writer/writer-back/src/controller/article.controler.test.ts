@@ -16,7 +16,7 @@ import { articleService } from "../services/article.service.js";
 
 import { articleController } from "./article.controller.js";
 
-describe("ArticleController - getArticle", () => {
+describe("Tests ArticleController - getArticle", () => {
     it("Si l'ID est manquante, doit retourner une erreur 400 ", async () => {
         const req = {   // on récupère les params de la requête, en recréant uniquement la partie qui nous est utile
             params: {}
