@@ -17,3 +17,8 @@ pre-commit:
       root: "wn-rajar-ms_reader/reader-back"
       run: npx eslint .
 
+pre-push:
+  commands:
+    test_writer_back:
+      root: "wn-rajar-ms_reader/reader-front"
+      run: npm run test
