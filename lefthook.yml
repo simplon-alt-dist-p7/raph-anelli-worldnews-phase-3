@@ -3,7 +3,6 @@ pre-commit:
   commands:
     verification_writer_back:
       root: "wn-rajar-ms_writer/writer-back"
-      glob: "**/*.ts"
       run: npx tsc --noEmit
 
     verification_writer_front:
