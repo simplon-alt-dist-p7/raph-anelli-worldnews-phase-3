@@ -65,7 +65,7 @@ describe("Tests ArticleController - getArticle", () => {
 
     it("Test de succès - doit retourner un code 200 si l'id de l'article est valide", async () => {
         const req = {
-            params: { id: "1" },
+            params: { id: "0" },
         } as any;
 
         const res = {
