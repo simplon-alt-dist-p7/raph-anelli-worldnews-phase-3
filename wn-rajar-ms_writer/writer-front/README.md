@@ -88,4 +88,6 @@ Pour effectuer les tests End-to-End (E2E), j'ai installé le framework de test P
 
 ```bash
 npm install -D @playwright/test
+
+npx playwright install
 ```
