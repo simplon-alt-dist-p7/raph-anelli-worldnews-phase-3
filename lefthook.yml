@@ -22,7 +22,3 @@ pre-push:
     test_writer_back:
       run: cd wn-rajar-ms_writer/writer-back && npm run test || exit 1
       always_run: true
-    
-    test_debug:
-      run: echo "HELLO PRE PUSH"
-      always_run: true
