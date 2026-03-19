@@ -38,3 +38,18 @@ test("Test sur la recherche d'article avec un mot clé", async ({page}) =>{
     // On vérifie le premier résultat et on s'attend à ce qu'il soit visible à l'écran
     await expect(results.first()).toBeVisible();
 });
+
+test("Test recherche d'article, clic sur Modifier et redirection vers la page de modification", async ({page}) =>{
+    await page.goto("http://localhost:5173");
+    await page.fill('input[placeholder="Rechercher un article..."]', "Technologie");
+    await page.getByRole("button", { name: "Rechercher" }).click();
+
+    //  On récupère le premier bouton Modifier
+    const editButton = page.getByRole("button", { name: "Modifier" }).first();
+
+    // L'utilisateur clic sur le bouton
+    await editButton.click();
+
+    // On s'attends à ce que l'utilisateur arrive sur la page edit de l'article
+    await expect(page).toHaveURL(/\/articles\/\d+\/edit/);  // \d+ correspond à un nombre, l'id de l'article
+});
