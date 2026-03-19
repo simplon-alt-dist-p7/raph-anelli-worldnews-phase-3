@@ -42,7 +42,7 @@ describe("Tests ArticleController - getArticle", () => {
 
     it("Test avec id à 0 = retourne une erreur 400", async () => {
         const req = {
-            params: { id: "4" }     // On met en paramètre un id = 0
+            params: { id: "5" }     // On met en paramètre un id = 0
         } as any;
 
         const res = {   // faux res, 
