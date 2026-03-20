@@ -3,27 +3,26 @@ pre-commit:
   commands:
     verification_writer_back:
       root: "wn-rajar-ms_writer/writer-back"
-      glob: "**/*.ts"
       run: npx tsc --noEmit
 
     verification_writer_front:
-      root: "wn-rajar-ms_writer/writer-front/"
-      glob: "**/*.{ts,tsx,jsx}"
-      run: |
-        for file in {staged_files}; do
-          npx tsc --jsx react-jsx --strict --noEmit "$file"
-        done
+      root: "wn-rajar-ms_writer/writer-front"
+      run: npx tsc -b
     
     verification_reader_front:
       root: "wn-rajar-ms_reader/reader-front"
-      glob: "**/*.{js,jsx}"
-      run: npx eslint {staged_files}
+      run: npx eslint .
 
     verification_reader_back:
       root: "wn-rajar-ms_reader/reader-back"
-      glob: "**/*.js"
-      run: |
-        for file in {staged_files}; do
-          node --check "$file"
-        done
+      run: npx eslint .
 
+pre-push:
+  commands:
+    test_writer_back:
+      run: cd wn-rajar-ms_writer/writer-back && npm run test || exit 1
+      always_run: true
+    
+    test_writer_front:
+      run: cd wn-rajar-ms_writer/writer-front && npm run test || exit 1
+      always_run: true

@@ -20,3 +20,13 @@ Down les volumes et supprimer
 ```bash
 docker compose down -v
 ```
+
+
+# Lefthook
+
+Dans reader-back, bien installer ESlint :
+
+```bash
+npm install -D eslint
+
+```
