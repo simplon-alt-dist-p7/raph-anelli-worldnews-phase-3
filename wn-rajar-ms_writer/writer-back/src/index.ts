@@ -15,8 +15,8 @@ const PORT = process.env.PORT;
 // Configuration CORS
 app.use(
   cors({
-    // origin: process.env.FRONTEND_URL, // ou FRONT_URL selon ce que tu as dans ton .env
-    origin: ["http://localhost:5173", "http://localhost:5174", "https://votredomaine.com", "http://reader-front:5174"],
+    origin: process.env.FRONTEND_URL, // ou FRONT_URL selon ce que tu as dans ton .env
+    // origin: ["http://localhost:5173", "http://localhost:5174", "https://votredomaine.com", "http://reader-front:5174"],
     credentials: true,
   })
 );
