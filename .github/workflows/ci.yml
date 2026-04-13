@@ -1,0 +1,11 @@
+name: Workflow test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dire bonjour
+        run: echo "Bonjour"
