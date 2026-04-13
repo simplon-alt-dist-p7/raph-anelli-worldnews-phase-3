@@ -6,7 +6,8 @@ const articlesRoutes = require("./routes/articles");
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:5174", "https://votredomaine.com", "http://reader-front:5173"],
+    origin: process.env.FRONTEND_URL,
+    // origin: ["http://localhost:5173", "http://localhost:5174", "https://votredomaine.com", "http://reader-front:5173"],
     methods: ["GET", "POST", "DELETE"],
     credentials: true,
   }),

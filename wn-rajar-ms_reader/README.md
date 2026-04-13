@@ -4,7 +4,7 @@ Une application web moderne pour consulter les dernières actualités du monde e
 
 Liens de l'application :
 - Frontend : https://world-news-rajar.vercel.app/
-- Backend : https://world-news-rajar.onrender.com
+- Backend : https://worldnews-reader-back-p1n3.onrender.com/articles
 - DB : https://supabase.com
 
 ## ✨ Fonctionnalités
