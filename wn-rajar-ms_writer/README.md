@@ -10,6 +10,11 @@
 
 Ce dépôt correspond à la **partie Writer** du prototype *World News*, développé dans le cadre d'un exercice pédagogique visant à valider la pertinence d'une **architecture microservices** en remplacement d'une application monolithique.
 
+Liens de l'application :
+- Frontend : https://world-news-writer-front.vercel.app/articles
+- Backend : https://worldnews-writer-back.onrender.com/
+- DB : https://supabase.com
+
 ### Périmètre fonctionnel
 
 Le module **Writer** (destiné aux journalistes) couvre :
@@ -130,6 +135,17 @@ Chaque équipe est autonome sur son périmètre tout en respectant une cohérenc
 
 5/ Ajoutez vos variables d'environnement d'une manière identique à celle de votre fichier .env et cliquez sur Deploy Web Service
 
+## Déploiement du frontend sur Vercel
+
+1/ Cliquez sur 'Add new' puis sur 'Project'
+
+2/ Choisir le repository Github et cliquez sur 'Import'
+
+3/ Dans la nouvelle fenêtre, écrivez un 'Project name' et sélectionnez un 'Root Directory'
+
+4/ Cliquez sur 'Environments Variables' et ajoutez les variables d'environnements nécessaires
+
+5/ Cliquez sur 'Deploy'
 
 ## Objectifs pédagogiques
 
