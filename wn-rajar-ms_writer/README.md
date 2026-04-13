@@ -118,6 +118,19 @@ Chaque équipe est autonome sur son périmètre tout en respectant une cohérenc
 
 ---
 
+## Déploiement du backend sur Render
+
+1/ Cliquez sur 'New service' et choisir Web Service
+
+2/ Dans l'onglet 'Public Git Repository', mettez le lien du repository que vous souhaitez déployer et cliquez sur 'Connect'
+
+3/ Mettez un nom pour ce service, choisissez le langage utilisé et précisez le Root Directory si nécessaire
+
+4/ Précisez votre Start Command ou Build Command 
+
+5/ Ajoutez vos variables d'environnement d'une manière identique à celle de votre fichier .env et cliquez sur Deploy Web Service
+
+
 ## Objectifs pédagogiques
 
 Ce prototype vise à démontrer :
